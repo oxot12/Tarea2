@@ -4,15 +4,28 @@
  */
 package Java_Escritorio_2;
 
+
 import java.text.Normalizer;
 import java.util.StringTokenizer;
+import Secundarios.AlertInformation;
+import Secundarios.Insertar;
+import Secundarios.Remplazar;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+
 
 /**
  *
  * @author Oseas Xt
  */
 public class Cadenas_Murcielagos extends javax.swing.JFrame {
-
+    public static boolean creoNuevo = false;
+    public static boolean abrioArchivo = false;
+    public static String valor;
     /**
      * Creates new form Cadenas_Murcielagos
      */
@@ -67,6 +80,7 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         lbltitulo2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txta_pantalla2 = new javax.swing.JTextArea();
+        lbl_nombre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -194,18 +208,35 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         txta_pantalla2.setRows(5);
         jScrollPane2.setViewportView(txta_pantalla2);
 
+        lbl_nombre.setForeground(new java.awt.Color(204, 204, 204));
+
         jMenu1.setText("Archivo");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Guardar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F12, 0));
         jMenuItem3.setText("Guardar como");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -214,22 +245,47 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem4.setText("Copiar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem5.setText("Cortar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem6.setText("Pegar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem7.setText("Buscar");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem8.setText("Reemplazar");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
@@ -251,19 +307,20 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblanuncio1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbltitulo2)
@@ -299,7 +356,11 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(lbl_rep_U, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(lbl_cant_par, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lbl_cant_impar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                                        .addComponent(lbl_cant_impar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblanuncio1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lbl_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(216, 216, 216)
                                 .addComponent(lbltitulo1))
@@ -315,85 +376,88 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbltitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblanuncio1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_procesar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_longitud_texto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_total_palabras)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_primer_letra_texto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_ultima_letra_texto)))
+                        .addComponent(lblanuncio1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_procesar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_longitud_texto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_total_palabras)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_primer_letra_texto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_ultima_letra_texto)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_letra_central_texto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_primera_palabra)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_palabra_central)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_ultima_palabra))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_letra_central_texto)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel19)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel23))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_rep_A)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_rep_E)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_rep_I)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_rep_O)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_primera_palabra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_palabra_central)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_ultima_palabra))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel23))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_rep_A)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_rep_E)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_rep_I)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_rep_O)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel27))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_rep_U)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_cant_par)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_cant_impar)))))
-                .addGap(18, 18, 18)
-                .addComponent(lbltitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel25)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel26)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel27))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_rep_U)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_cant_par)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbl_cant_impar)))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbltitulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -407,6 +471,11 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         String[] palabraarray = txta_pantalla1.getText().split(" ");
         String[] chararray = texto.split("");
         int longitud = 0;
+        
+         for (int i = 0; i < palabraarray.length; i++){
+            longitud ++;
+
+        }
         
         StringTokenizer st = new StringTokenizer(texto);
         lbl_total_palabras.setText(""+st.countTokens());
@@ -456,36 +525,36 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         int contadorO=0;
         int contadorU=0;
 
-        for (int x = 0 ; x < texto.length(); x++){
-            if (texto.charAt(x)== 'E' || texto.charAt(x)== 'e' || texto.charAt(x)== 'É' || texto.charAt(x)== 'é'){
+        for (int f = 0 ; f < texto.length(); f++){
+            if (texto.charAt(f)== 'E' || texto.charAt(f)== 'e' || texto.charAt(f)== 'É' || texto.charAt(f)== 'é'){
                 contadorE++;
             }
         }
         lbl_rep_E.setText(""+contadorE);
 
-        for (int x = 0 ; x < texto.length(); x++){
-            if (texto.charAt(x)== 'A' || texto.charAt(x)== 'a' || texto.charAt(x)== 'Á' || texto.charAt(x)== 'á'){
+        for (int l = 0 ; l < texto.length(); l++){
+            if (texto.charAt(l)== 'A' || texto.charAt(l)== 'a' || texto.charAt(l)== 'Á' || texto.charAt(l)== 'á'){
                 contadorA++;
             }
         }
         lbl_rep_A.setText(""+contadorA);
 
-        for (int x = 0 ; x < texto.length(); x++){
-            if (texto.charAt(x)== 'O' || texto.charAt(x)== 'o' || texto.charAt(x)== 'Ó' || texto.charAt(x)== 'ó'){
+        for (int k = 0 ; k < texto.length(); k++){
+            if (texto.charAt(k)== 'O' || texto.charAt(k)== 'o' || texto.charAt(k)== 'Ó' || texto.charAt(k)== 'ó'){
                 contadorO++;
             }
         }
         lbl_rep_O.setText(""+contadorO);
 
-        for (int x = 0 ; x < texto.length(); x++){
-            if (texto.charAt(x)== 'U' || texto.charAt(x)== 'u' || texto.charAt(x)== 'Ú' || texto.charAt(x)== 'ú'){
+        for (int j = 0 ; j < texto.length(); j++){
+            if (texto.charAt(j)== 'U' || texto.charAt(j)== 'u' || texto.charAt(j)== 'Ú' || texto.charAt(j)== 'ú'){
                 contadorU++;
             }
         }
         lbl_rep_U.setText(""+contadorU);
 
-        for (int x = 0 ; x < texto.length(); x++){
-            if (texto.charAt(x)== 'I' || texto.charAt(x)== 'i' || texto.charAt(x)== 'Í' || texto.charAt(x)== 'í'){
+        for (int i = 0 ; i < texto.length(); i++){
+            if (texto.charAt(i)== 'I' || texto.charAt(i)== 'i' || texto.charAt(i)== 'Í' || texto.charAt(i)== 'í'){
                 contadorI++;
             }
         }
@@ -512,6 +581,76 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         txta_pantalla2.setText(s);
        
     }//GEN-LAST:event_btn_procesarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+         new file().LeerFichero(this);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+                if (abrioArchivo) {
+            System.out.println("Existente");
+            new file().GuardarFichero(Cadenas_Murcielagos.txta_pantalla1.getText(), Cadenas_Murcielagos.lbl_nombre.getText());
+        }
+        if (creoNuevo) {
+            System.out.println("Nuevo");
+            new file().CrearFicheroNuevo(this, Cadenas_Murcielagos.txta_pantalla1.getText(), Cadenas_Murcielagos.lbl_nombre.getText());
+        }
+        if (!creoNuevo && !abrioArchivo) {
+            Secundarios.AlertInformation a = new AlertInformation(this, true);
+            AlertInformation.lbl_mensaje1.setText("Debes crear o abrir un archvo");
+            AlertInformation.lbl_mensaje2.setText("para poder guardarlo.");
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Existente");
+            new file().GuardarFichero(Cadenas_Murcielagos.txta_pantalla1.getText(), Cadenas_Murcielagos.lbl_nombre.getText());
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+           StringSelection selection = new StringSelection(txta_pantalla1.getText());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        StringSelection selection = new StringSelection(txta_pantalla1.getText());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);  
+        txta_pantalla1.setText("");
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    DataFlavor flavor = DataFlavor.stringFlavor;
+    if (clipboard.isDataFlavorAvailable(flavor)) {
+      try {
+        String text = (String) clipboard.getData(flavor);
+        txta_pantalla1.setText(text);
+      } catch (UnsupportedFlavorException | IOException e) {
+        System.out.println(e);
+      }
+    }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Secundarios.Insertar a = new Insertar(this, true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        Secundarios.Remplazar a = new Remplazar(this, true);
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,10 +680,8 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Cadenas_Murcielagos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Cadenas_Murcielagos().setVisible(true);
         });
     }
 
@@ -578,25 +715,26 @@ public class Cadenas_Murcielagos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbl_cant_impar;
-    private javax.swing.JLabel lbl_cant_par;
-    private javax.swing.JLabel lbl_letra_central_texto;
-    private javax.swing.JLabel lbl_longitud_texto;
-    private javax.swing.JLabel lbl_palabra_central;
-    private javax.swing.JLabel lbl_primer_letra_texto;
-    private javax.swing.JLabel lbl_primera_palabra;
-    private javax.swing.JLabel lbl_rep_A;
-    private javax.swing.JLabel lbl_rep_E;
-    private javax.swing.JLabel lbl_rep_I;
-    private javax.swing.JLabel lbl_rep_O;
-    private javax.swing.JLabel lbl_rep_U;
-    private javax.swing.JLabel lbl_total_palabras;
-    private javax.swing.JLabel lbl_ultima_letra_texto;
-    private javax.swing.JLabel lbl_ultima_palabra;
+    public static javax.swing.JLabel lbl_cant_impar;
+    public static javax.swing.JLabel lbl_cant_par;
+    public static javax.swing.JLabel lbl_letra_central_texto;
+    public static javax.swing.JLabel lbl_longitud_texto;
+    public static javax.swing.JLabel lbl_nombre;
+    public static javax.swing.JLabel lbl_palabra_central;
+    public static javax.swing.JLabel lbl_primer_letra_texto;
+    public static javax.swing.JLabel lbl_primera_palabra;
+    public static javax.swing.JLabel lbl_rep_A;
+    public static javax.swing.JLabel lbl_rep_E;
+    public static javax.swing.JLabel lbl_rep_I;
+    public static javax.swing.JLabel lbl_rep_O;
+    public static javax.swing.JLabel lbl_rep_U;
+    public static javax.swing.JLabel lbl_total_palabras;
+    public static javax.swing.JLabel lbl_ultima_letra_texto;
+    public static javax.swing.JLabel lbl_ultima_palabra;
     private javax.swing.JLabel lblanuncio1;
     private javax.swing.JLabel lbltitulo1;
     private javax.swing.JLabel lbltitulo2;
-    private javax.swing.JTextArea txta_pantalla1;
+    public static javax.swing.JTextArea txta_pantalla1;
     private javax.swing.JTextArea txta_pantalla2;
     // End of variables declaration//GEN-END:variables
 }
